@@ -1,0 +1,25 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+  <script type=text/javascript src="{{
+    url_for('static', filename='jquery.js') }}"></script>
+  <title>VenueRunner - {% block title %}{% endblock %}</title>
+</head>
+<body>
+  <div id="menu">
+    <ul>
+      <li><a href="list_events">List Events</a></li>
+      <li><a href="add_event">Add Event</a></li>
+      <li><a href="list_customers">List Customers</a></li>
+      <li><a href="add_customer">Add Customer</a></li>
+      <li>Create Coupon</li>
+      <li>Attribute Editor</li>
+      <li>Analytics</li>
+    </ul>
+  </div>
+  <div id="content">{% block content %}{% endblock %}</div>
+  <div id="footer">
+    &copy; Copyright 2010 by <a href="mailto:froseph@gmail.com">Joseph Liu</a>.
+  </div>
+</body>

@@ -1,0 +1,5 @@
+# Dependencies
+
+* Python 2.7
+* Flask 0.6
+* jquery-ui 1.8.6

@@ -1,0 +1,4 @@
+setup db:
+python
+from venuerunne import init_db
+init_db()
