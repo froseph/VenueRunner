@@ -2,7 +2,17 @@
 {% block title %}Add Event{% endblock %}
 {% block content %}
 
-Event Name
-Event Date
+{% from '_formhelpers.html' import render_field %}
 
+<form method="post" action="/add_event"> 
+  {{ form.hidden_tag()|safe }}
+  <dl>
+    {{ render_field(form.name) }}
+    {{ render_field(form.date) }}
+    {{ render_field(form.price) }}
+    {{ render_field(form.description) }}
+  </dl>
+  <input type="submit" value="Create Event" />
+</form>
+    
 {% endblock %}

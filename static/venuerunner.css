@@ -14,6 +14,10 @@ div#menu ul li {
   padding: .25em;
 }
 
+ul.errors {
+  color: 880000;
+}
+
 
 /* from http://html5boilerplate.com/ */
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */

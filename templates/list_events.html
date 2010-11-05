@@ -1,10 +1,26 @@
 {% extends "base.html" %}
-{% block title %}Events List{% endblock %}
+{% block title %}event List{% endblock %}
 {% block content %}
 
-Calendar
-A table
-Event Name
-Event Date
+<table border=1>
+  <tr>
+    <td> Date </td>
+    <td> Name </td>
+    <td> Attendees </td>
+    <td> Revenue </td>
+    <td> Event Price </td>
+    <td> Description </td>
+  </tr>
+  {% for event in events %}
+    <tr>
+      <td>{{ event.date }} </td>
+      <td>{{ event.name }} </td>
+      <td> n/a </td>
+      <td> n/a </td>
+      <td>{{ event.price }} </td>
+      <td>{{ event.description }} </td>
+    </tr>
+  {% endfor %}
+</table>
 
 {% endblock %}
