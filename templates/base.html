@@ -2,12 +2,16 @@
 <html lang="en">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-  <script type=text/javascript src="{{
+  <script type="text/javascript" src="{{
     url_for('static', filename='jquery.js') }}"></script>
+  <script type="text/javascript" src="{{
+    url_for('static', filename='jquery-ui.js') }}"></script>
+    <link rel="stylesheet" type="text/css"
+      href="{{ url_for('static', filename='venuerunner.css') }}" />
   <title>VenueRunner - {% block title %}{% endblock %}</title>
 </head>
 <body>
-  <div id="menu">
+  <div id="menu" class="clearfix">
     <ul>
       <li><a href="list_events">List Events</a></li>
       <li><a href="add_event">Add Event</a></li>
