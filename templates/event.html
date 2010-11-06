@@ -1,15 +1,16 @@
 {% extends "base.html" %}
-{% block title %}Event - {{event.name}}{% endblock %}
+{% block title %} Event - {{event.name}}{% endblock %}
 {% block content %}
 
-<dt>Date</dt>
-<dd>{{ event.date }} </dd>
-<dt>Name</dt>
-<dd>{{ event.name }} </dd>
-<dt>Price</dt>
-<dd>{{ event.price }} </dd>
-<dt>Description</dt>
-<dd>{{ event.description }} </dd>
-</table>
+<dl>
+  <dt> Date </dt>
+    <dd> {{ event.date }} </dd>
+  <dt> Name </dt>
+    <dd> {{ event.name }} </dd>
+  <dt> Price </dt>
+    <dd> {{ event.price }} </dd>
+  <dt> Description </dt>
+    <dd> {{ event.description }} </dd>
+</dl>
 
 {% endblock %}

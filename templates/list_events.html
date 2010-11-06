@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %}event List{% endblock %}
+{% block title %} Event List {% endblock %}
 {% block content %}
 
 <table border=1>
@@ -13,12 +13,12 @@
   </tr>
   {% for event in events %}
     <tr>
-      <td>{{ event.date }} </td>
-      <td>{{ event.name }} </td>
+      <td> {{ event.date }} </td>
+      <td> {{ event.name }} </td>
       <td> n/a </td>
       <td> n/a </td>
-      <td>{{ event.price }} </td>
-      <td>{{ event.description }} </td>
+      <td> {{ event.price }} </td>
+      <td> {{ event.description }} </td>
     </tr>
   {% endfor %}
 </table>
