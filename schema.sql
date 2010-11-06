@@ -3,8 +3,8 @@ CREATE TABLE IF NOT EXISTS customers (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255),
     email VARCHAR(255),
-    lead BOOL NOT NULL,
-    follow BOOL NOT NULL,
+    lead BOOL NOT NULL, -- could make this generic
+    follow BOOL NOT NULL, -- could make this generic
     signup_date DATE NOT NULL,
     last_seen_date DATE NOT NULL,
     notes STRING
@@ -14,14 +14,14 @@ CREATE TABLE IF NOT EXISTS customers (
 CREATE TABLE IF NOT EXISTS customer_flags (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name STRING NOT NULL,
-    type STRING NOT NULL,
+    type STRING NOT NULL, -- is this needed? what is this needed for?
     description STRING
 );
 
 CREATE TABLE IF NOT EXISTS customer_flags_map (
     customer_id INTEGER KEY,
     customer_flag INTEGER NOT NULL,
-    value INTEGER,
+    value INTEGER, -- is this needed, idea is to support things like work trade/purchase pack
     FOREIGN KEY(customer_id) REFERENCES custmoers(id),
     FOREIGN KEY(customer_flag) REFERENCES customer_flags(id),
     PRIMARY KEY (customer_id, customer_flag)
