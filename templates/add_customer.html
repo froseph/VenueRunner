@@ -2,11 +2,20 @@
 {% block title %}Add Customer{% endblock %}
 {% block content %}
 
-First Name
-Last Name
-Email
-Lead
-Follow
-Signup Date
+{% from '_formhelpers.html' import render_field %}
+
+<form method="post" action="/add_customer">
+  {{ form.hidden_tag()|safe }}
+  <dl>
+    {{ render_field(form.firstname) }}
+    {{ render_field(form.lastname) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.lead) }}
+    {{ render_field(form.follow) }}
+    {{ render_field(form.signup) }}
+    {{ render_field(form.note) }}
+  </dl>
+  <input type="submit" value="Add Customer" />
+</form>
 
 {% endblock %}

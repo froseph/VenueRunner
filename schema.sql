@@ -3,18 +3,20 @@ CREATE TABLE IF NOT EXISTS customers (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255),
     email VARCHAR(255),
-    lead BOOL NOT NULL, -- could make this generic
-    follow BOOL NOT NULL, -- could make this generic
+    lead BOOLEAN NOT NULL, -- could make this generic
+    follow BOOLEAN NOT NULL, -- could make this generic
     signup_date DATE NOT NULL,
     last_seen_date DATE NOT NULL,
-    notes STRING
+    note STRING
 );
 
 -- volunteer, comped, etc.
+-- call this tags?
 CREATE TABLE IF NOT EXISTS customer_flags (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name STRING NOT NULL,
     type STRING NOT NULL, -- is this needed? what is this needed for?
+    -- add permissions?
     description STRING
 );
 

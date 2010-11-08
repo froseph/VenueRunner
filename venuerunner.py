@@ -46,19 +46,53 @@ def favicon():
 def menu():
   return render_template('menu.html')
 
-@app.route('/customer/<customerid>')
-def customer():
-  return render_template('customer.html')
+@app.route('/customer/<int:customerid>')
+def customer(customerid):
+  print customerid
+  customer = query_db(
+      """
+      SELECT first_name, last_name, email, lead, follow, signup_date,
+      last_seen_date, note FROM customers WHERE id = ?
+      """, [customerid], True)
+  return render_template('customer.html', customer=customer)
 
 @app.route('/list_customers')
 def list_customers():
-  return render_template('list_customers.html')
+  customers = query_db(
+      """
+      SELECT id, first_name, last_name, email, lead, follow, signup_date,
+      last_seen_date, note FROM customers
+      """)
+  return render_template('list_customers.html', customers=customers)
 
-@app.route('/add_customer')
-def list_customers():
-  return render_template('add_customer.html')
+@app.route('/add_customer', methods=['GET', 'POST'])
+def add_customer():
+  form = VRForms.addcustomer()
+  if form.validate_on_submit():
+    c = g.db.cursor()
+    c.execute(
+        """
+        INSERT INTO customers 
+        (first_name, last_name,
+         email, lead, follow,
+         signup_date, last_seen_date,
+         note)
+         VALUES
+        (?, ?,
+         ?, ?, ?,
+         ?, ?,
+         ?)
+        """,
+        [request.form['firstname'], request.form['lastname'],
+        request.form['email'], request.form.get('lead', False) == 'y', request.form.get('follow', False) == 'y',
+        request.form['signup'], request.form['signup'],
+        request.form['note']])
+    g.db.commit()
+    customerid = c.lastrowid
+    return redirect(url_for('customer', customerid=customerid)) # do i want to do this?
+  return render_template('add_customer.html', form=form)
 
-@app.route('/event/<eventid>')
+@app.route('/event/<int:eventid>')
 def event(eventid):
   event = query_db(
       'SELECT id, name, date, price, description  FROM events WHERE id = ?',
@@ -78,8 +112,8 @@ def list_events():
 @app.route('/add_event', methods=['GET', 'POST'])
 def add_event():
   form = VRForms.addevent()
-  c = g.db.cursor()
   if form.validate_on_submit():
+    c = g.db.cursor()
     c.execute(
         """
         INSERT INTO events (name, date, price, description)
@@ -89,7 +123,7 @@ def add_event():
          request.form['price'], request.form['description']])
     g.db.commit()
     eventid = c.lastrowid
-    return redirect(url_for('event', eventid=eventid)) # temp
+    return redirect(url_for('event', eventid=eventid))
   return render_template('add_event.html', form=form)
 
 def query_db(query, args=(), one=False):

@@ -1,9 +1,39 @@
 {% extends "base.html" %}
-{% block title %}Customer List{% endblock %}
+{% block title %} Customer List {% endblock %}
 {% block content %}
 
-Search
-First Name Last Name Email
+<table border=1>
+  <tr>
+    <td> First Name </td>
+    <td> Last Name </td>
+    <td> E-mail </td>
+    <td> Lead </td>
+    <td> Follow </td>
+    <td> Signup Date </td>
+    <td> Last Seen Date </td>
+    <td> Note </td>
+    <td> Tags </td>
+  </tr>
+  {% for customer in customers %}
+    <tr>
+      <td> {{ customer.first_name }} </td>
+      <td> {{ customer.last_name }} </td>
+      <td> {{ customer.email }} </td>
+      <td> {{ customer.lead }} </td>
+      <td> {{ customer.follow }} </td>
+      <td> {{ customer.signup_date }} </td>
+      <td> {{ customer.last_seen_date }} </td>
+      <td> {{ customer.note }} </td>
+      <td> 
+        {% for tag in customer.tags %}
+          {{ tag.name }}
+          {% if tag.value %} : {{ tag.value }} {% endif %}
+          &nbsp
+        {% endfor %}
+      </td>
+    </tr>
+  {% endfor %}
+</table>
 
 {% endblock %}
 

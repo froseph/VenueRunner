@@ -1,11 +1,31 @@
 {% extends "base.html" %}
-{% block title %}Customer{% endblock %}
+{% block title %} Customer - {{customer.firstname}} - {{customer.lastname}} {% endblock %}
 {% block content %}
 
-Customer
-All Stasts
-
-List of events attended
+<dl>
+  <dt> First Name </dt>
+    <dd> {{ customer.firstname }} </dd>
+  <dt> Last Name </dt>
+    <dd> {{ customer.lastname }} </dd>
+  <dt> E-mail </dt>
+    <dd> {{ customer.email }} </dd>
+  <dt> Lead </dt>
+    <dd> {{ customer.lead }} </dd>
+  <dt> Follow </dt>
+    <dd> {{ customer.follow }} </dd>
+  <dt> Signup date </dt>
+    <dd> {{ customer.signup}} </dd>
+  <dt> Last Seen </dt>
+    <dd> {{ customer.lastseen }} </dd>
+  <dt> Tags </dt>
+    <dd>
+      {% for tag in customer.tags %}
+        {{ tag.name }}
+        {% if tag.value %} : {{ tag.value }} {% endif %}
+        &nbsp
+      {% endfor %}
+    </dd>
+</dl>
 
 {% endblock %}
 
