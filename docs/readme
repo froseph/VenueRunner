@@ -1,4 +1,40 @@
-setup db:
+# Venue Runner
+
+Venue Runner allows you to quickly run and operate a venue. It also helps you
+run analytics to determine areas of defficiency.
+
+## Goals
+
+1. Maintain a mailinglist of all attendees to the venue.
+2. Maintain attendence of all attendees for every night.
+3. Financial bookkeeping for a venue.
+4. Basic anaylitics to make informed decisions.
+5. Historical records for future decisions.
+6. Create and mantain any coupons or special deals on behalf of a customer.
+
+## Installing
+
+SETUP DB:
 python
 from venuerunne import init_db
 init_db()
+
+## Hacking
+
+### SQL tables
+
+customers       - data which exists for all customers
+customer_properties     - defines properties for customers e.g. volunteers, comped, worktrade, bulk passes, work trade. Can add be used for permissioning.
+customer_flag_map       - defines flgas attributed to a customer. May contain
+a value. E.g. 1 free pass. Maybe need added/removed dates
+
+mailinglists    - defines mailinglists
+customer_mailinglist_map        - defines mailinglists customer is assigned
+to. Status shows if user has been exported, removed, etc.
+
+events          - definees events that are being run
+event_attendenc - A list of customers attending an event and the amount paid
+coupon          - Coupons that can be applied
+
+Maybe: event flag map- easier to search for events:w
+

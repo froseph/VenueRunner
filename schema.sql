@@ -3,29 +3,26 @@ CREATE TABLE IF NOT EXISTS customers (
     first_name VARCHAR(255) NOT NULL,
     last_name VARCHAR(255),
     email VARCHAR(255),
-    lead BOOLEAN NOT NULL, -- could make this generic
-    follow BOOLEAN NOT NULL, -- could make this generic
+    lead BOOLEAN NOT NULL,
+    follow BOOLEAN NOT NULL,
     signup_date DATE NOT NULL,
     last_seen_date DATE NOT NULL,
     note STRING
 );
 
--- volunteer, comped, etc.
--- call this tags?
-CREATE TABLE IF NOT EXISTS customer_flags (
+CREATE TABLE IF NOT EXISTS customer_properties (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name STRING NOT NULL,
-    type STRING NOT NULL, -- is this needed? what is this needed for?
-    -- add permissions?
+    type INTEGER NOT NULL, -- Used to implement custom logic. Internal for now.
     description STRING
 );
 
-CREATE TABLE IF NOT EXISTS customer_flags_map (
+CREATE TABLE IF NOT EXISTS customer_property_map (
     customer_id INTEGER KEY,
-    customer_flag INTEGER NOT NULL,
-    value INTEGER, -- is this needed, idea is to support things like work trade/purchase pack
+    customer_property INTEGER NOT NULL,
+    value INTEGER,
     FOREIGN KEY(customer_id) REFERENCES custmoers(id),
-    FOREIGN KEY(customer_flag) REFERENCES customer_flags(id),
+    FOREIGN KEY(customer_property) REFERENCES customer_properties(id),
     PRIMARY KEY (customer_id, customer_flag)
 );
 
@@ -35,7 +32,7 @@ CREATE TABLE IF NOT EXISTS mailinglists (
     description STRING
 );
 
-CREATE TABLE IF NOT EXISTS user_mailinglist_map (
+CREATE TABLE IF NOT EXISTS customer_mailinglist_map (
     customer_id INTEGER KEY,
     mailing_id INTEGER KEY,
     status TINYINTEGER NOT NULL,
@@ -52,13 +49,6 @@ CREATE TABLE IF NOT EXISTS events (
     description STRING
 );
 
-CREATE TABLE IF NOT EXISTS coupons (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    name STRING NOT NULL,
-    value INTEGER NOT NULL,
-    description STRING
-);
-
 CREATE TABLE IF NOT EXISTS event_attendence (
     event_id INTEGER KEY,
     customer_id INTEGER KEY,
@@ -68,4 +58,11 @@ CREATE TABLE IF NOT EXISTS event_attendence (
     FOREIGN KEY(event_id) REFERENCES events(id),
     FOREIGN KEY(customer_id) REFERENCES customers(id),
     PRIMARY KEY (event_id, customer_id)
+);
+
+CREATE TABLE IF NOT EXISTS coupons (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name STRING NOT NULL,
+    value INTEGER NOT NULL,
+    description STRING
 );
