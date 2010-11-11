@@ -3,4 +3,5 @@ Basic functionality:
 * Go to event from list event
 * Go to customer from list customer
 * Record attendence
-*
+* split off list customers table css from the venue runner css
+* Merge list customers & list events template files?

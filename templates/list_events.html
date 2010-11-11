@@ -2,17 +2,20 @@
 {% block title %} Event List {% endblock %}
 {% block content %}
 
-<table border=1>
-  <tr>
-    <td> Date </td>
-    <td> Name </td>
-    <td> Attendees </td>
-    <td> Revenue </td>
-    <td> Event Price </td>
-    <td> Description </td>
-  </tr>
-  {% for event in events %}
+<table id="event_list" class="datatable">
+  <thead>
     <tr>
+      <th> Date </th>
+      <th> Name </th>
+      <th> Attendees </th>
+      <th> Revenue </th>
+      <th> Event Price </th>
+      <th> Description </th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for event in events %}
+    <tr id={{ "event_" ~ event.id }} >
       <td> {{ event.date }} </td>
       <td> {{ event.name }} </td>
       <td> n/a </td>
@@ -21,6 +24,19 @@
       <td> {{ event.description }} </td>
     </tr>
   {% endfor %}
+  </tbody>
 </table>
+
+<script type="text/javascript">
+
+  $(document).ready(function() {
+    $('#event_list').dataTable();
+
+    $('table tbody tr').click( function() {
+      var id = $(this).attr('id').slice(6);
+      window.location = '/event/'+id;
+      })
+  });
+</script>
 
 {% endblock %}
