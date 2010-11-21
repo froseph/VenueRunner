@@ -97,7 +97,12 @@ def event(eventid):
   event = query_db(
       'SELECT id, name, date, price, description  FROM events WHERE id = ?',
       [eventid], True)
-  return render_template('event.html', event=event)
+
+  customers = query_db(
+      """
+      SELECT id, first_name, last_name, email, signup_date, last_seen_date FROM customers
+      """)
+  return render_template('event.html', event=event, customers=customers)
 
 @app.route('/list_events')
 def list_events():

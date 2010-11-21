@@ -8,6 +8,8 @@
     url_for('static', filename='jquery-ui.js') }}"></script>
   <link rel="stylesheet" type="text/css"
     href="{{ url_for('static', filename='venuerunner.css') }}" />
+  <link rel="stylesheet" type="text/css"
+    href="{{ url_for('static', filename='jquery-ui.css') }}" />
 
 <script type="text/javascript" src="{{
   url_for('static', filename='jquery.dataTables.min.js') }}"></script>
@@ -16,10 +18,10 @@
 <body>
   <div id="menu" class="clearfix">
     <ul>
-      <li><a href="/list_events">List Events</a></li>
-      <li><a href="/add_event">Add Event</a></li>
-      <li><a href="/list_customers">List Customers</a></li>
-      <li><a href="/add_customer">Add Customer</a></li>
+      <li><a href="/list_events" class="button">List Events</a></li>
+      <li><a href="/add_event" class="button">Add Event</a></li>
+      <li><a href="/list_customers" class="button">List Customers</a></li>
+      <li><a href="/add_customer" class="button">Add Customer</a></li>
       <li>Create Coupon</li>
       <li>Customer Property Editor</li>
       <li>Analytics</li>
@@ -29,4 +31,9 @@
   <div id="footer">
     &copy; Copyright 2010 by <a href="mailto:froseph@gmail.com">Joseph Liu</a>.
   </div>
+
+  <script type="text/javascript">
+    $(".button").button();
+    $(":submit").button();
+  </script>
 </body>

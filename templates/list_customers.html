@@ -2,6 +2,7 @@
 {% block title %} Customer List {% endblock %}
 {% block content %}
 
+<div id="container" class="ui-widget ui-widget-content ui-corner-all">
 <table id="customer_list" class="datatable">
   <thead>
     <tr>
@@ -38,6 +39,7 @@
   {% endfor %}
   </tbody>
 </table>
+</div>
 
 <script type="text/javascript">
   $(document).ready(function() {

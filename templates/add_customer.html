@@ -4,6 +4,7 @@
 
 {% from '_formhelpers.html' import render_field %}
 
+<div id="container" class="ui-widget ui-widget-content ui-corner-all">
 <form method="post" action="/add_customer">
   {{ form.hidden_tag()|safe }}
   <dl>
@@ -17,5 +18,6 @@
   </dl>
   <input type="submit" value="Add Customer" />
 </form>
+</div>
 
 {% endblock %}

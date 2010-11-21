@@ -1,7 +1,22 @@
 Basic functionality:
 
-* Go to event from list event
-* Go to customer from list customer
+* Fix colors
 * Record attendence
-* split off list customers table css from the venue runner css
+** Select people -- use autocomplete?
+** Enter amount paid
+** Enter coupon code(s)
+* Editable rows to tables
+* Move add event to 'events' page
+* Move add customer to attendence page
+* Add 'create customer' to customer page
+* Create coupon
+* Create attribute/property
+* Import customers via CSV.
+* Analyitics
+** Number of attendees graph
+** Revenue graph
+* Create scheduling for events
+* Create ajax endpoint for customer data table source.
+* Create ajax endpoint for event data table source
+* split off list customers table css from the venue runner css?
 * Merge list customers & list events template files?

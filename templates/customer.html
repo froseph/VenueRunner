@@ -2,6 +2,7 @@
 {% block title %} Customer - {{customer.firstname}} - {{customer.lastname}} {% endblock %}
 {% block content %}
 
+<div id="container" class="ui-widget ui-widget-content ui-corner-all">
 <dl>
   <dt> First Name </dt>
     <dd> {{ customer.firstname }} </dd>
@@ -26,6 +27,7 @@
       {% endfor %}
     </dd>
 </dl>
+</div>
 
 {% endblock %}
 
