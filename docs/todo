@@ -1,6 +1,5 @@
 Basic functionality:
 
-* Fix colors
 * Record attendence
 ** Select people -- use autocomplete?
 ** Enter amount paid
@@ -9,6 +8,7 @@ Basic functionality:
 * Move add event to 'events' page
 * Move add customer to attendence page
 * Add 'create customer' to customer page
+* Update add event and add customer forms
 * Create coupon
 * Create attribute/property
 * Import customers via CSV.
