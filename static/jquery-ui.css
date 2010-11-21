@@ -66,9 +66,11 @@
 
 /* Interaction states
 ----------------------------------*/
-.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default,
+.ui-state-default, .ui-widget-content .ui-state-default, .ui-widget-header .ui-state-default
+/*
 table.datatable tr.odd,
 table.datatable tr.even
+*/
 { border: 1px solid #333333; background: #333333 url(images/ui-bg_dots-small_20_333333_2x2.png) 50% 50% repeat; font-weight: bold; color: #ffffff; }
 .ui-state-default a, .ui-state-default a:link, .ui-state-default a:visited { color: #ffffff; text-decoration: none; }
 .ui-state-hover, .ui-widget-content .ui-state-hover, .ui-widget-header .ui-state-hover, .ui-state-focus, .ui-widget-content .ui-state-focus, .ui-widget-header .ui-state-focus,
