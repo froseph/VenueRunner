@@ -8,19 +8,20 @@ Basic functionality:
 <alpha 1 product>
 * Create coupon
 * Enter coupon code(s)
+* Create attribute/property
 <alpha2 product>
+
 * make add event/add customer into popup form
 * Move add event to 'events' page
 * Move add customer to attendence page
 * Add 'create customer' to customer page
 <alpha3 product>
 
-* Create attribute/property
-<alpha 4 product>
-
 *Cleanup and rewrite
 ** customer/<action>
 ** event/action
+** event/<int>
+** customer/<int>
 ** Split off db functions to a class
 
 <alpha 5 product>

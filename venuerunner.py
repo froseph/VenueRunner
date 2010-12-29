@@ -4,6 +4,7 @@ from contextlib import closing
 
 #VenueRunner classes
 import VRForms
+import VRDB
 
 # Config - TODO use separate file!
 DEBUG = True # Remove in production code
@@ -46,95 +47,72 @@ def favicon():
 def menu():
   return render_template('menu.html')
 
-@app.route('/customer/<int:customerid>')
-def customer(customerid):
-  print customerid
-  customer = query_db(
-      """
-      SELECT first_name, last_name, email, lead, follow, signup_date,
-      last_seen_date, note FROM customers WHERE id = ?
-      """, [customerid], True)
+@app.route('/customer/<int:customer_id>')
+def customer(customer_id):
+  customer = VRDB.customer(customer_id)
   return render_template('customer.html', customer=customer)
 
 @app.route('/list_customers')
 def list_customers():
-  customers = query_db(
-      """
-      SELECT id, first_name, last_name, email, lead, follow, signup_date,
-      last_seen_date, note FROM customers
-      """)
+  customers = VRDB.customers()
   return render_template('list_customers.html', customers=customers)
 
+#posts form and redirects to the new customer. Really should let the app
+# decide what is best to do rather than redirect!
 @app.route('/add_customer', methods=['GET', 'POST'])
 def add_customer():
   form = VRForms.addcustomer()
   if form.validate_on_submit():
-    c = g.db.cursor()
-    c.execute(
-        """
-        INSERT INTO customers 
-        (first_name, last_name,
-         email, lead, follow,
-         signup_date, last_seen_date,
-         note)
-         VALUES
-        (?, ?,
-         ?, ?, ?,
-         ?, ?,
-         ?)
-        """,
-        [request.form['firstname'], request.form['lastname'],
-        request.form['email'], request.form.get('lead', False) == 'y', request.form.get('follow', False) == 'y',
-        request.form['signup'], request.form['signup'],
-        request.form['note']])
-    g.db.commit()
-    customerid = c.lastrowid
-    return redirect(url_for('customer', customerid=customerid)) # do i want to do this?
+    lead = request.form.get('lead', False) == 'y'
+    follow = request.form.get('follow', False) == 'y'
+    customer_id = VRDB.customer_add(first_name=request.form['first_name'],
+        last_name=request.form['last_name'],
+        email=request.form['email'],
+        lead=lead,
+        follow=follow,
+        signup_date=request.form['signup'],
+        note=request.form['note'])
+    return redirect(url_for('customer', customer_id=customer_id)) # do i want to do this?
   return render_template('add_customer.html', form=form)
 
-@app.route('/event/<int:eventid>')
-def event(eventid):
-  event = query_db(
-      'SELECT id, name, date, price, description  FROM events WHERE id = ?',
-      [eventid], True)
+#REST thingy to add customers
+@app.route('/customer/add', methods=['POST'])
+def post_add_customer():
+  form = VRForms.addcustomer()
+  customer_id = -1;
+  errors = None;
+  if form.validate_on_submit():
+    lead = request.form.get('lead', False) == 'y'
+    follow = request.form.get('follow', False) == 'y'
+    customer_id = customer_add(first_name=request.form['first_name'],
+        last_name=request.form['last_name'],
+        email=request.form['email'],
+        lead=lead,
+        follow=follow,
+        signup_date=request.form['signup'],
+        note=request.form['note'])
+  return jsonify(errors=errors, customer_id =customer_id)
 
-  customers = query_db(
-      """
-      SELECT id, first_name, last_name, email, signup_date, last_seen_date
-      FROM customers
-      """)
-
-  attendence = query_db(
-      'SELECT customer_id, paid, coupon_id FROM event_attendence WHERE event_id = ?',
-      [eventid])
+@app.route('/event/<int:event_id>')
+def event(event_id):
+  event = VRDB.event(event_id)
+  customers = VRDB.customers()
+  attendence = VRDB.event_attendence(event_id)
 
   return render_template('event.html', event=event, customers=customers)
 
 @app.route('/list_events')
 def list_events():
-  events = query_db(
-      """
-      SELECT id, name, date, price, description
-        FROM events
-        ORDER BY date DESC
-      """)# limiit low, high
+  events = VRDB.events()
   return render_template('list_events.html', events=events)
 
 @app.route('/add_event', methods=['GET', 'POST'])
 def add_event():
   form = VRForms.addevent()
   if form.validate_on_submit():
-    c = g.db.cursor()
-    c.execute(
-        """
-        INSERT INTO events (name, date, price, description)
-        VALUES (?, ?, ?, ?)
-        """,
-        [request.form['name'], request.form['date'],
-         request.form['price'], request.form['description']])
-    g.db.commit()
-    eventid = c.lastrowid
-    return redirect(url_for('event', eventid=eventid))
+    event_id = VRDB.event_add(name=request.form['name'], date=request.form['date'],
+        price=request.form['price'], description=request.form['description'])
+    return redirect(url_for('event', event_id=event_id))
   return render_template('add_event.html', form=form)
 
 @app.route('/event/record_attendence', methods=['POST'])
@@ -148,11 +126,6 @@ def record_attendence():
   #     event
   return jsonify(success=true)
 
-def query_db(query, args=(), one=False):
-  cur = g.db.execute(query, args)
-  rv = [dict((cur.description[idx][0], value)
-             for idx, value in enumerate(row)) for row in cur.fetchall()]
-  return (rv[0] if rv else None) if one else rv
 
 # dead code, but maybe use in the future
 def smart_truncate(content, length=100, suffix='...'):

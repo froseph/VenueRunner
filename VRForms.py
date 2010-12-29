@@ -7,8 +7,8 @@ class addevent(Form):
   description = TextField('Description', [validators.Length(min=1, max=16384)])
 
 class addcustomer(Form):
-  firstname = TextField('First Name', [validators.Length(min=1, max=63)])
-  lastname = TextField('Last Name', [validators.Length(min=1, max=63)])
+  first_name = TextField('First Name', [validators.Length(min=1, max=63)])
+  last_name = TextField('Last Name', [validators.Length(min=1, max=63)])
   email = TextField('E-mail', [validators.Length(min=1, max=63), validators.Email()])
   lead = BooleanField('Lead', [])
   follow = BooleanField('Follow', [])

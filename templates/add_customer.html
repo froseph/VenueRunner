@@ -8,8 +8,8 @@
 <form method="post" action="/add_customer">
   {{ form.hidden_tag()|safe }}
   <dl>
-    {{ render_field(form.firstname) }}
-    {{ render_field(form.lastname) }}
+    {{ render_field(form.first_name) }}
+    {{ render_field(form.last_name) }}
     {{ render_field(form.email) }}
     {{ render_field(form.lead) }}
     {{ render_field(form.follow) }}
