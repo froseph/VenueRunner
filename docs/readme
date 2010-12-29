@@ -23,18 +23,16 @@ init_db()
 
 ### SQL tables
 
-customers       - data which exists for all customers
-customer_properties     - defines properties for customers e.g. volunteers, comped, worktrade, bulk passes, work trade. Can add be used for permissioning.
-customer_flag_map       - defines flgas attributed to a customer. May contain
-a value. E.g. 1 free pass. Maybe need added/removed dates
+customers           - data which exists for all customers
+customer_properties - defines properties for customers e.g. volunteers, comped, worktrade, bulk passes, work trade. Can add be used for permissioning.
+customer_flag_map   - defines flgas attributed to a customer. May contain a value. E.g. 1 free pass. Maybe need added/removed dates
 
-mailinglists    - defines mailinglists
-customer_mailinglist_map        - defines mailinglists customer is assigned
-to. Status shows if user has been exported, removed, etc.
+mailinglists             - defines mailinglists
+customer_mailinglist_map - defines mailinglists customer is assigned to. Status shows if user has been exported, removed, etc.
 
-events          - definees events that are being run
-event_attendenc - A list of customers attending an event and the amount paid
-coupon          - Coupons that can be applied
+events           - definees events that are being run
+event_attendence - A list of customers attending an event and the amount paid
+coupon           - Coupons that can be applied
 
 Maybe: event flag map- easier to search for events:w
 
