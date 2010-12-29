@@ -1,22 +1,44 @@
 Basic functionality:
 
 * Record attendence
-** Select people -- use autocomplete?
 ** Enter amount paid
-** Enter coupon code(s)
-* Editable rows to tables
+** Delete attendence
+* method to load/save/new db
+
+<alpha 1 product>
+* Create coupon
+* Enter coupon code(s)
+<alpha2 product>
+* make add event/add customer into popup form
 * Move add event to 'events' page
 * Move add customer to attendence page
 * Add 'create customer' to customer page
-* Update add event and add customer forms
-* Create coupon
+<alpha3 product>
+
 * Create attribute/property
-* Import customers via CSV.
-* Analyitics
+<alpha 4 product>
+
+*Cleanup and rewrite
+** customer/<action>
+** event/action
+** Split off db functions to a class
+
+<alpha 5 product>
+
+* Basic analytics
 ** Number of attendees graph
 ** Revenue graph
+
+<beta1>
+
+* Import customers via CSV
 * Create scheduling for events
+
+** Select people -- use autocomplete?
+* Editable rows to tables??
 * Create ajax endpoint for customer data table source.
 * Create ajax endpoint for event data table source
 * split off list customers table css from the venue runner css?
 * Merge list customers & list events template files?
+* Import events via CSV
+* Import Attendence via CSV
