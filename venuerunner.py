@@ -5,7 +5,7 @@ from contextlib import closing
 #VenueRunner classes
 import VRForms
 
-# Config - use separate file!
+# Config - TODO use separate file!
 DEBUG = True # Remove in production code
 DATABASE = 'venue.db'
 PASSWORD = 'moo'
@@ -100,8 +100,14 @@ def event(eventid):
 
   customers = query_db(
       """
-      SELECT id, first_name, last_name, email, signup_date, last_seen_date FROM customers
+      SELECT id, first_name, last_name, email, signup_date, last_seen_date
+      FROM customers
       """)
+
+  attendence = query_db(
+      'SELECT customer_id, paid, coupon_id FROM event_attendence WHERE event_id = ?',
+      [eventid])
+
   return render_template('event.html', event=event, customers=customers)
 
 @app.route('/list_events')
@@ -130,6 +136,17 @@ def add_event():
     eventid = c.lastrowid
     return redirect(url_for('event', eventid=eventid))
   return render_template('add_event.html', form=form)
+
+@app.route('/event/record_attendence', methods=['POST'])
+def record_attendence():
+  #validate
+  #record
+  # structure
+  # list
+  #     customer id
+  #     price
+  #     event
+  return jsonify(success=true)
 
 def query_db(query, args=(), one=False):
   cur = g.db.execute(query, args)

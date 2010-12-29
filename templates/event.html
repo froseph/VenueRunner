@@ -22,51 +22,125 @@
   </div>
 
   <div id="event_attendence">
-  <!-- todo make custom data source -->
-  <table id="customer_list" class="datatable">
-    <thead>
-      <tr>
-        <th> First Name </th>
-        <th> Last Name </th>
-        <th> E-mail </th>
-        <th> Signup Date </th>
-        <th> Last Seen Date </th>
-        <th> Tags </th>
-      </tr>
-    </thead>
-    <tbody>
-    {% for customer in customers %}
-      <tr id="{{ "customer_" ~ customer.id }}">
-        <td> {{ customer.first_name }} </td>
-        <td> {{ customer.last_name }} </td>
-        <td> {{ customer.email }} </td>
-        <td> {{ customer.signup_date }} </td>
-        <td> {{ customer.last_seen_date }} </td>
-        <td>
-          {% for tag in customer.tags %}
-            {{ tag.name }}
-            {% if tag.value %} : {{ tag.value }} {% endif %}
-            &nbsp
-          {% endfor %}
-        </td>
-      </tr>
-    {% endfor %}
-    </tbody>
-  </table>
+    <div id="customer_search" class="clearfix">
+    <table id="customer_list" class="datatable">
+      <thead>
+        <tr>
+          <th class="id">ID</th>
+          <th class="first_name"> First Name </th>
+          <th class="last_name"> Last Name </th>
+          <th class="email"> E-mail </th>
+          <th class="signup_date"> Signup Date </th>
+          <th class="last_seen_date"> Last Seen Date </th>
+          <th class="tags"> Tags </th>
+        </tr>
+      </thead>
+      <tbody>
+      {% for customer in customers %}
+        <tr>
+          <td> {{ customer.id }} </td>
+          <td> {{ customer.first_name }} </td>
+          <td> {{ customer.last_name }} </td>
+          <td> {{ customer.email }} </td>
+          <td> {{ customer.signup_date }} </td>
+          <td> {{ customer.last_seen_date }} </td>
+          <td>
+            {% for tag in customer.tags %}
+              {{ tag.name }}
+              {% if tag.value %} : {{ tag.value }} {% endif %}
+              &nbsp
+            {% endfor %}
+          </td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+    </div>
+
+    <div id="attendence">
+    </div>
   </div>
 </div>
 
 <script type="text/javascript">
-  $(function() { 
-      $('#event').tabs();
-      $('#customer_list').dataTable();
 
-      // build ui accordian with this search bar?
-      $('#customer_list table tbody tr').click( function() {
-        var id = $(this).attr('id').slice(9); 
-        // get the attributes/data
-        //
+  var attendence_list = [];
+  var sEvent = [];
+
+  function initAttendence() {
+    $('#attendence').accordion("destroy");
+    $('#attendence').accordion({collapsible: true});
+  }
+
+  function genAttendenceBody(customer) {
+    return $('<div/>').text(customer.firstname + ' ' + customer.lastname)
+      .append($('<form/>')
+          .append($('<dl/>')
+            .append($('<dt/>').text('Amount Paid'))
+            .append($('<dd/>').append($('<input/>').attr('type', 'text'))))
+          .append($('<input/>').attr('type', 'submit').attr('value', 'Record'))
+          .append($('<input/>').attr('type', 'submit').attr('value','Delete'))
+          );
+  }
+
+  function genAttendenceHeader(customer) {
+    return $('<h3/>').append(
+        $('<a/>').attr('href', '#')
+                 .text(customer.firstname + ' ' + customer.lastname)
+        )
+  }
+
+  function renderAttendenceRow(customer) {
+    var attendenceDOM = $('#attendence');
+    attendenceDOM.prepend(genAttendenceBody(customer));
+    attendenceDOM.prepend(genAttendenceHeader(customer));
+  }
+
+  function renderAttendence(attendencelist) {
+    for (var i = attendencelist.size - 1; i >= 0; i--) {
+      renderAttendenceRow(attendencelist[i]);
+    }
+  }
+
+  function customerRowToData(row) {
+    return {
+      'id' : row[0],
+      'firstname' : row[1],
+      'lastname' : row[2],
+      'email' : row[3]
+    };
+  }
+
+  $(function() {
+      $('#event').tabs();
+      var customerTable = $('table#customer_list').dataTable(
+        {
+          "aoColumnDefs" : [
+            {
+              "aTargets" : ["signup_date", "last_seen_date", "tags"],
+              "bSearchable" : false,
+              "bSortable" : false
+            },
+            {
+              "aTargets" : ["id"],
+              "bVisible" : false
+            }
+          ],
+          "bJQueryUI" : true,
+          "bLengthChange" : false
+        }
+        );
+
+      // Um need to bind this shit.
+      $('table#customer_list tbody tr').click( function() {
+        var customer = customerRowToData(customerTable.fnGetData(this));
+        renderAttendenceRow(customer);
+
+        // Reset attendence
+        initAttendence();
       })
+
+      initAttendence();
   } );
 </script>
 {% endblock %}

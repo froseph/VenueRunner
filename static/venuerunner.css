@@ -53,6 +53,7 @@ content: "\0020"; display: block; height: 0; visibility: hidden;
  * DataTables features
  */
 
+
 .dataTables_wrapper {
 	position: relative;
 	min-height: 302px;
@@ -283,4 +284,11 @@ td.details {
 }
 
 
+.css_right {
+	float: right;
+}
+
+.css_left {
+	float: left;
+}
 
