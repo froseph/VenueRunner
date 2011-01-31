@@ -23,6 +23,21 @@ ul.errors {
   color: 880000;
 }
 
+dl {
+  display: table;
+}
+.drow {
+  display: table-row;
+}
+
+dt {
+  display: table-cell;
+  padding-right: 1em;
+}
+
+dd {
+  display: table-cell;
+}
 
 /* from http://html5boilerplate.com/ */
 /* >> The Magnificent CLEARFIX: Updated to prevent margin-collapsing on child elements << j.mp/bestclearfix */
