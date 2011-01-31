@@ -1,5 +1,5 @@
 import sqlite3
-from flask import Flask, g, render_template, request, redirect, url_for
+from flask import Flask, g, render_template, request, redirect, url_for 
 from contextlib import closing
 
 #VenueRunner classes
@@ -111,7 +111,8 @@ def add_event():
   form = VRForms.addevent()
   if form.validate_on_submit():
     event_id = VRDB.event_add(name=request.form['name'], date=request.form['date'],
-        price=request.form['price'], description=request.form['description'])
+        description=request.form['description'])
+    app.logger.debug('moo') # XXX
     return redirect(url_for('event', event_id=event_id))
   return render_template('add_event.html', form=form)
 
