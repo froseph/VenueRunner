@@ -47,7 +47,6 @@ CREATE TABLE IF NOT EXISTS events (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     date DATE NOT NULL,
     name STRING NOT NULL,
-    price INTEGER,
     description STRING
 );
 
