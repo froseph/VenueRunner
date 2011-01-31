@@ -1,5 +1,6 @@
 import sqlite3
 from flask import Flask, g, render_template, request, redirect, url_for 
+from werkzeug.datastructures import MultiDict
 from contextlib import closing
 
 #VenueRunner classes
@@ -47,10 +48,12 @@ def favicon():
 def menu():
   return render_template('menu.html')
 
-@app.route('/customer/<int:customer_id>')
+#TODO write save functionality
+@app.route('/customer/<int:customer_id>', methods=['GET', 'POST'])
 def customer(customer_id):
   customer = VRDB.customer(customer_id)
-  return render_template('customer.html', customer=customer)
+  form = VRForms.addcustomer(MultiDict(customer))
+  return render_template('customer.html', form=form)
 
 @app.route('/list_customers')
 def list_customers():
@@ -72,7 +75,7 @@ def add_customer():
         follow=follow,
         signup_date=request.form['signup'],
         note=request.form['note'])
-    return redirect(url_for('customer', customer_id=customer_id)) # do i want to do this?
+    return redirect(url_for('customer', customer_id=customer_id))
   return render_template('add_customer.html', form=form)
 
 #REST thingy to add customers
@@ -93,13 +96,15 @@ def post_add_customer():
         note=request.form['note'])
   return jsonify(errors=errors, customer_id =customer_id)
 
+#TODO write save functionality
 @app.route('/event/<int:event_id>')
 def event(event_id):
   event = VRDB.event(event_id)
+  form = VRForms.addevent(MultiDict(event))
   customers = VRDB.customers()
   attendence = VRDB.event_attendence(event_id)
 
-  return render_template('event.html', event=event, customers=customers)
+  return render_template('event.html', form=form, customers=customers)
 
 @app.route('/list_events')
 def list_events():

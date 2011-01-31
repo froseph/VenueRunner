@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Event - {{event.name}}{% endblock %}
+{% block title %} Event - {{form.name.data}}{% endblock %}
 {% block content %}
 
 <div id="event">
@@ -9,20 +9,16 @@
   </ul>
 
   <div id="event_info">
-    <dl>
-      <div class="drow">
-        <dt> Date </dt>
-        <dd> {{ event.date }} </dd>
-      </div>
-      <div class="drow">
-        <dt> Name </dt>
-        <dd> {{ event.name }} </dd>
-      </div>
-      <div class="drow">
-        <dt> Description </dt>
-        <dd> {{ event.description }} </dd>
-      </div>
-    </dl>
+    {% from '_formhelpers.html' import render_field %}
+    <form method="post" action="/add_event"> 
+      {{ form.hidden_tag()|safe }}
+      <dl>
+        {{ render_field(form.name) }}
+        {{ render_field(form.date, class="datepicker") }}
+        {{ render_field(form.description) }}
+      </dl>
+      <input type="submit" value="Update" />
+    </form>
   </div>
 
   <div id="event_attendence">

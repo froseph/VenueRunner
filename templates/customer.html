@@ -3,46 +3,22 @@
 {% block content %}
 
 <div id="container" class="ui-widget ui-widget-content ui-corner-all">
+
+{% from '_formhelpers.html' import render_field %}
+<form method="post" action="/add_customer">
+  {{ form.hidden_tag()|safe }}
   <dl>
-    <div class="drow">
-      <dt> First Name </dt>
-      <dd> {{ customer.firstname }} </dd>
-    </div>
-    <div class="drow">
-      <dt> Last Name </dt>
-      <dd> {{ customer.lastname }} </dd>
-    </div>
-    <div class="drow">
-      <dt> E-mail </dt>
-      <dd> {{ customer.email }} </dd>
-    </div>
-    <div class="drow">
-      <dt> Lead </dt>
-      <dd> {{ customer.lead }} </dd>
-    </div>
-    <div class="drow">
-      <dt> Follow </dt>
-      <dd> {{ customer.follow }} </dd>
-    </div>
-    <div class="drow">
-      <dt> Signup date </dt>
-      <dd> {{ customer.signup}} </dd>
-    </div>
-    <div class="drow">
-      <dt> Last Seen </dt>
-      <dd> {{ customer.lastseen }} </dd>
-    </div>
-    <div class="drow">
-      <dt> Tags </dt>
-      <dd>
-        {% for tag in customer.tags %}
-          {{ tag.name }}
-          {% if tag.value %} : {{ tag.value }} {% endif %}
-          &nbsp
-        {% endfor %}
-      </dd>
-    </div>
+    {{ render_field(form.first_name) }}
+    {{ render_field(form.last_name) }}
+    {{ render_field(form.email) }}
+    {{ render_field(form.lead) }}
+    {{ render_field(form.follow) }}
+    {{ render_field(form.signup, class="datepicker") }}
+    {{ render_field(form.note) }}
   </dl>
+  <input type="submit" value="Update" />
+</form>
+
 </div>
 
 {% endblock %}
