@@ -10,6 +10,7 @@ CREATE TABLE IF NOT EXISTS customers (
     note STRING
 );
 
+-- Future feature?
 CREATE TABLE IF NOT EXISTS customer_properties (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     name STRING NOT NULL,
@@ -17,13 +18,14 @@ CREATE TABLE IF NOT EXISTS customer_properties (
     description STRING
 );
 
+-- Future feature?
 CREATE TABLE IF NOT EXISTS customer_property_map (
     customer_id INTEGER KEY,
-    customer_property INTEGER NOT NULL,
+    customer_property INTEGER KEY NOT NULL,
     value INTEGER,
-    FOREIGN KEY(customer_id) REFERENCES custmoers(id),
+    FOREIGN KEY(customer_id) REFERENCES customers(id),
     FOREIGN KEY(customer_property) REFERENCES customer_properties(id),
-    PRIMARY KEY (customer_id, customer_flag)
+    PRIMARY KEY (customer_id, customer_property)
 );
 
 CREATE TABLE IF NOT EXISTS mailinglists (
@@ -52,11 +54,13 @@ CREATE TABLE IF NOT EXISTS events (
 CREATE TABLE IF NOT EXISTS event_attendence (
     event_id INTEGER KEY,
     customer_id INTEGER KEY,
-    entrytime DATETIME NOT NULL,
-    paid INTEGER NOT NULL,
+    entry_time DATETIME NOT NULL,
+    amount INTEGER NOT NULL,
     coupon_id INTEGER,
+    sku INTEGER,
     FOREIGN KEY(event_id) REFERENCES events(id),
     FOREIGN KEY(customer_id) REFERENCES customers(id),
+    FOREIGN KEY(sku) REFERENCES sku(id),
     PRIMARY KEY (event_id, customer_id)
 );
 
@@ -66,3 +70,14 @@ CREATE TABLE IF NOT EXISTS coupons (
     value INTEGER NOT NULL,
     description STRING
 );
+
+-- Add meta value for 
+CREATE TABLE IF NOT EXISTS sku (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    name STRING NOT NULL,
+    price INTEGER NOT NULL,
+    description STRING
+);
+
+-- Future feature
+-- create table class
