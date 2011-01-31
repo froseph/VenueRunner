@@ -51,3 +51,4 @@ Basic functionality:
 * Merge list customers & list events template files?
 * Import events via CSV
 * Import Attendence via CSV
+* Add AJAX CSRF handling

@@ -121,7 +121,7 @@ def add_event():
     return redirect(url_for('event', event_id=event_id))
   return render_template('add_event.html', form=form)
 
-@app.route('/event/record_attendence', methods=['POST'])
+@app.route('/event/attendence/record', methods=['POST'])
 def record_attendence():
   #validate
   #record
@@ -131,6 +131,10 @@ def record_attendence():
   #     price
   #     event
   return jsonify(success=true)
+
+@app.route('/event/attendence/record', methods=['POST'])
+def delete_attendence():
+  return
 
 
 # dead code, but maybe use in the future
