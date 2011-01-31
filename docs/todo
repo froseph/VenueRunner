@@ -3,18 +3,23 @@ Basic functionality:
 * Record attendence
 ** Enter amount paid
 ** Delete attendence
+
 * method to load/save/new db
 
 <alpha 1 product>
+
 * Create coupon
 * Enter coupon code(s)
 * Create attribute/property
+* Enter SKU
+
 <alpha2 product>
 
 * make add event/add customer into popup form
 * Move add event to 'events' page
 * Move add customer to attendence page
 * Add 'create customer' to customer page
+*
 <alpha3 product>
 
 *Cleanup and rewrite
@@ -22,7 +27,10 @@ Basic functionality:
 ** event/action
 ** event/<int>
 ** customer/<int>
-** Split off db functions to a class
+
+* Error checking
+* DELETE flag
+* Clean off interfaces
 
 <alpha 5 product>
 
