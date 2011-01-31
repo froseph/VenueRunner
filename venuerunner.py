@@ -73,12 +73,12 @@ def add_customer():
         email=request.form['email'],
         lead=lead,
         follow=follow,
-        signup_date=request.form['signup'],
+        signup_date=request.form['signup_date'],
         note=request.form['note'])
     return redirect(url_for('customer', customer_id=customer_id))
   return render_template('add_customer.html', form=form)
 
-#REST thingy to add customers
+#REST thingy to add customers, not curretly used
 @app.route('/customer/add', methods=['POST'])
 def post_add_customer():
   form = VRForms.addcustomer()
@@ -92,7 +92,7 @@ def post_add_customer():
         email=request.form['email'],
         lead=lead,
         follow=follow,
-        signup_date=request.form['signup'],
+        signup_date=request.form['signup_date'],
         note=request.form['note'])
   return jsonify(errors=errors, customer_id =customer_id)
 

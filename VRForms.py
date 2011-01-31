@@ -11,5 +11,5 @@ class addcustomer(Form):
   email = TextField('E-mail', [validators.Length(min=1, max=63), validators.Email()])
   lead = BooleanField('Lead', [])
   follow = BooleanField('Follow', [])
-  signup = DateField('Signup Date', [validators.optional(),validators.Required('Need to provide a date')]) #TODO add good default
+  signup_date = DateField('Signup Date', [validators.optional(),validators.Required('Need to provide a date')]) #TODO add good default
   note = TextAreaField('Note', [])

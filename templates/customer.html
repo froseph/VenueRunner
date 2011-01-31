@@ -1,5 +1,5 @@
 {% extends "base.html" %}
-{% block title %} Customer - {{customer.firstname}} - {{customer.lastname}} {% endblock %}
+{% block title %} Customer - {{form.first_name.data}} {{form.last_name.data}} {% endblock %}
 {% block content %}
 
 <div id="container" class="ui-widget ui-widget-content ui-corner-all">
@@ -13,7 +13,7 @@
     {{ render_field(form.email) }}
     {{ render_field(form.lead) }}
     {{ render_field(form.follow) }}
-    {{ render_field(form.signup, class="datepicker") }}
+    {{ render_field(form.signup_date, class="datepicker") }}
     {{ render_field(form.note) }}
   </dl>
   <input type="submit" value="Update" />
