@@ -9,12 +9,10 @@
   {{ form.hidden_tag()|safe }}
   <dl>
     {{ render_field(form.name) }}
-    {{ render_field(form.date) }}
-    {{ render_field(form.price) }}
+    {{ render_field(form.date, class="datepicker") }}
     {{ render_field(form.description) }}
   </dl>
   <input type="submit" value="Create Event" />
 </form>
 </div>
-    
 {% endblock %}

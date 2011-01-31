@@ -3,30 +3,46 @@
 {% block content %}
 
 <div id="container" class="ui-widget ui-widget-content ui-corner-all">
-<dl>
-  <dt> First Name </dt>
-    <dd> {{ customer.firstname }} </dd>
-  <dt> Last Name </dt>
-    <dd> {{ customer.lastname }} </dd>
-  <dt> E-mail </dt>
-    <dd> {{ customer.email }} </dd>
-  <dt> Lead </dt>
-    <dd> {{ customer.lead }} </dd>
-  <dt> Follow </dt>
-    <dd> {{ customer.follow }} </dd>
-  <dt> Signup date </dt>
-    <dd> {{ customer.signup}} </dd>
-  <dt> Last Seen </dt>
-    <dd> {{ customer.lastseen }} </dd>
-  <dt> Tags </dt>
-    <dd>
-      {% for tag in customer.tags %}
-        {{ tag.name }}
-        {% if tag.value %} : {{ tag.value }} {% endif %}
-        &nbsp
-      {% endfor %}
-    </dd>
-</dl>
+  <dl>
+    <div class="drow">
+      <dt> First Name </dt>
+      <dd> {{ customer.firstname }} </dd>
+    </div>
+    <div class="drow">
+      <dt> Last Name </dt>
+      <dd> {{ customer.lastname }} </dd>
+    </div>
+    <div class="drow">
+      <dt> E-mail </dt>
+      <dd> {{ customer.email }} </dd>
+    </div>
+    <div class="drow">
+      <dt> Lead </dt>
+      <dd> {{ customer.lead }} </dd>
+    </div>
+    <div class="drow">
+      <dt> Follow </dt>
+      <dd> {{ customer.follow }} </dd>
+    </div>
+    <div class="drow">
+      <dt> Signup date </dt>
+      <dd> {{ customer.signup}} </dd>
+    </div>
+    <div class="drow">
+      <dt> Last Seen </dt>
+      <dd> {{ customer.lastseen }} </dd>
+    </div>
+    <div class="drow">
+      <dt> Tags </dt>
+      <dd>
+        {% for tag in customer.tags %}
+          {{ tag.name }}
+          {% if tag.value %} : {{ tag.value }} {% endif %}
+          &nbsp
+        {% endfor %}
+      </dd>
+    </div>
+  </dl>
 </div>
 
 {% endblock %}

@@ -10,14 +10,18 @@
 
   <div id="event_info">
     <dl>
-      <dt> Date </dt>
+      <div class="drow">
+        <dt> Date </dt>
         <dd> {{ event.date }} </dd>
-      <dt> Name </dt>
+      </div>
+      <div class="drow">
+        <dt> Name </dt>
         <dd> {{ event.name }} </dd>
-      <dt> Price </dt>
-        <dd> {{ event.price }} </dd>
-      <dt> Description </dt>
+      </div>
+      <div class="drow">
+        <dt> Description </dt>
         <dd> {{ event.description }} </dd>
+      </div>
     </dl>
   </div>
 
@@ -117,13 +121,13 @@
         {
           "aoColumnDefs" : [
             {
-              "aTargets" : ["signup_date", "last_seen_date", "tags"],
+              "aTargets" : ["id", "signup_date", "last_seen_date", "tags"],
               "bSearchable" : false,
               "bSortable" : false
             },
             {
               "aTargets" : ["id"],
-              "bVisible" : false
+              "bVisible" : true // XXX why does this break the visual styling?
             }
           ],
           "bJQueryUI" : true,
